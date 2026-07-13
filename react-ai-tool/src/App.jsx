@@ -7,6 +7,7 @@ function App() {
   
 
   const askQuestion=()=>{
+    let response=await fetch(URL)
     console.log(question);
     
   }
