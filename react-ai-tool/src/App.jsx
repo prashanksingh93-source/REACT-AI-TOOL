@@ -6,34 +6,38 @@ function App() {
 
   const [question,setQuestion]=useState('');
   
-   const payload={
-    "contents": [
-      {
-        "parts": [
-          {
-            "text": "Explain how AI works in a few words"
-          }
-        ]
-      }
-    ]}
-  const askQuestion = async () => {
-  let response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent', {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-goog-api-key": "AQ.Ab8RN6Lq0vWSggCZZ8u0f9QK_mqYYfkuVnW3hgg3xFcJFKKl7w",
+const payload = {
+  contents: [
+    {
+      parts: [
+        {
+          text: "Explain how AI works in a few words",
+        },
+      ],
     },
-    body: JSON.stringify(payload),
-  });
-
-  response = await response.json();
-  console.log(response);
+  ],
 };
-}
+
+const askQuestion = async () => {
+  const response = await fetch(
+    "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-goog-api-key": 'AQ.Ab8RN6Lq0vWSggCZZ8u0f9QK_mqYYfkuVnW3hgg3xFcJFKKl7w',
+      },
+      body: JSON.stringify(payload), 
+    }
+  );
+
+  const data = await response.json();
+  console.log(data);
+};
     
   
   
-  return (
+  return (<>
    <div className='grid grid-cols-5 h-screen text-center'>
     <div className='col-span-1 bg-zinc-700'>
 
@@ -49,7 +53,8 @@ function App() {
       </div>
     </div> 
    </div>
-  )
+  </>)
+}
 
 
 export default App
