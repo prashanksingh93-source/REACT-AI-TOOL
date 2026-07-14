@@ -20,8 +20,7 @@ const payload = {
   ],
 };
 const API = import.meta.env.GEMINI_API_KEY;
-const URL =
-  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API}`
+const URL =`https://generativelanguage.googleapis.com/v1beta/models?key=${API}`
 
 async function askQuestion() {
   const response = await fetch(URL, {
