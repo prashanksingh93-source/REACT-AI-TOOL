@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+// import { URL } from './constants';
+// import { URL } from './constants';
 
 
 function App() {
@@ -11,33 +13,33 @@ const payload = {
     {
       parts: [
         {
-          text: "Explain how AI works in a few words",
+          text: question,
         },
       ],
     },
   ],
 };
+const API = import.meta.env.GEMINI_API_KEY;
+const URL =
+  `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API}`
 
-const askQuestion = async () => {
-  const response = await fetch(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-goog-api-key": 'AQ.Ab8RN6Lq0vWSggCZZ8u0f9QK_mqYYfkuVnW3hgg3xFcJFKKl7w',
-      },
-      body: JSON.stringify(payload), 
-    }
-  );
+async function askQuestion() {
+  const response = await fetch(URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+
+  console.log("Status:", response.status);
 
   const data = await response.json();
   console.log(data);
-};
-    
-  
-  
-  return (<>
+}
+
+
+  return (
    <div className='grid grid-cols-5 h-screen text-center'>
     <div className='col-span-1 bg-zinc-700'>
 
@@ -53,7 +55,7 @@ const askQuestion = async () => {
       </div>
     </div> 
    </div>
-  </>)
+   )
 }
 
 
